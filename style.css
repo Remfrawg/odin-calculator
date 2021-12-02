@@ -1,0 +1,29 @@
+body{
+   display: flex; 
+   justify-content: center;
+   padding-top:50px;
+   font-size: 20px;
+}
+.display{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.numbers{
+    display: flex;
+    padding:10px;
+    gap: 10px;
+}
+.operators{
+    display: flex;
+    padding:10px;
+    gap: 20px;
+}
+div{
+   
+    min-height: 20px;
+    min-width: 20px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+}
