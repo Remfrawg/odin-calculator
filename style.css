@@ -4,21 +4,55 @@ body{
    padding-top:50px;
    font-size: 20px;
 }
+.container{
+    padding: 0;
+}
+button{
+    width: 50px;
+    height: 62.25px;
+    
+    padding:10px;
+}
+.buttonBox{
+    display: flex;
+    min-width: 200px;
+    min-height: 300px;
+    padding: 0;
+}
 .display{
     display: flex;
     justify-content: center;
-    padding: 10px;
+    align-items: center;
+    padding:10px;
+    height:50px;
+    font-size: 24px;
+    border-width: 2px;
+    border-bottom-width: 0px;
 }
 .numbers{
+    box-sizing: border-box;
+    width:200px;
+    height: 300px;
     display: flex;
-    padding:10px;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
-.operators{
-    display: flex;
-    padding:10px;
-    gap: 20px;
+.number{
+    width: 50px;
+    height: 62.25px;
 }
+.operators, .numbers{
+    padding:10px;
+}
+.operators{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 300px;
+}
+
 div{
    
     min-height: 20px;

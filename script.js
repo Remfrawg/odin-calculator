@@ -10,10 +10,14 @@ numbers.forEach((num)=>{
     console.log("creating node: " + num.innerText);
     num.addEventListener("click",()=>{
        /*  console.log("clicking " + num.innerText); */
+       if (oldVal !== "" && operatorVal ===""){
+
+       }else{
         var selectedNum = num.innerText;
         newVal +=selectedNum;
         displayVal +=selectedNum;
         display.innerText = displayVal;
+    }
         console.log(`after new num -new val: ${newVal} old val: ${oldVal} operator val: ${operatorVal}`);
     });
 
@@ -22,16 +26,13 @@ numbers.forEach((num)=>{
 var operators = document.querySelectorAll(".operate");
 operators.forEach((op)=>{
     op.addEventListener("click",()=>{   
-        if (oldVal ==""){
+        if (oldVal ==="" && newVal !==""){
             operatorVal = op.innerText;
             oldVal = displayVal;
             displayVal +=operatorVal;
             display.innerText = displayVal;
             newVal = "";
-        }else if (newVal!=""){
-            alert("Don't click that!")
-        }
-        else{
+        }else if (newVal==="" && operatorVal==="" && oldVal !==""){
             operatorVal = op.innerText;
             displayVal +=operatorVal;
             display.innerText += op.innerText;
@@ -42,36 +43,55 @@ operators.forEach((op)=>{
 
 var compute = document.querySelector(".compute");
 compute.addEventListener("click",()=>{
-    operate(oldVal,operatorVal,newVal);
-    operatorVal = "";
-    newVal = "";
+    if (newVal != "" && operatorVal!=""){
+        operate();
+        operatorVal = "";
+        newVal = "";
+    }
     console.log(`after operate - new val: ${newVal} old val: ${oldVal} operator val: ${operatorVal}`);
 });
-function operate(old,operator,newValue){
-    if (operator == "+"){
-        oldVal = +old + +newValue;
+function operate(){
+    if (operatorVal == "+"){
+        console.log("old: "+oldVal +"    new: " +newVal);
+        oldVal = +oldVal + +newVal;
+        console.log("old value after computing: "+oldVal);
         displayVal = oldVal.toString();
         display.innerText= oldVal;
-    } else if(operator == "-"){
-        oldVal = +old - +newValue;
+    } else if(operatorVal == "-"){
+        oldVal = +oldVal - +newVal;
         displayVal = oldVal.toString();
         display.innerText= oldVal;
-    } else if(operator  =="*"){
-        oldVal = +old * +newValue;
+    } else if(operatorVal  =="*"){
+        oldVal = +oldVal * +newVal;
+        if (oldVal%1 !=0){
+            oldVal = oldVal.toFixed(2);
+            }
         displayVal = oldVal.toString();
         display.innerText= oldVal;
-    } /*division*/ else{
-        oldVal = +old / +newValue;
-        displayVal = oldVal.toString();
-        display.innerText= oldVal;
+    }else{
+        if (newVal !=0){
+            oldVal = +oldVal / +newVal;
+            if (oldVal%1 !=0){
+                oldVal = oldVal.toFixed(2);
+            }
+            displayVal = oldVal.toString();
+            display.innerText= oldVal;
+        }
+        else {
+            alert("I'm gonna divide YOU into " + oldVal +"/0 pieces");
+            newVal = "";
+            operatorVal == "";
+            displayVal = oldVal;
+            display.innerText= displayVal;
+        }
     }
 newVal = "";
 };
-
-function reset(){
-oldVal = "";
-newVal = "";
-display.innerText = 0;
-displayVal = "";
-operatorVal = "";
-};
+const resetButton = document.querySelector(".clear");
+resetButton.addEventListener("click",()=>{
+    oldVal = "";
+    newVal = "";
+    display.innerText = "Enter a number";
+    displayVal = "";
+    operatorVal = "";
+})
